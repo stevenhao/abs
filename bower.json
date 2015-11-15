@@ -1,0 +1,19 @@
+{
+  "name": "abs",
+  "description": "empty file",
+  "main": "index.js",
+  "authors": [
+    "Brian Chen <brian.chxn@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/stevenhao/abs",
+  "moduleType": [],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

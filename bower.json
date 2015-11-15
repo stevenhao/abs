@@ -15,5 +15,9 @@
     "bower_components",
     "test",
     "tests"
-  ]
+  ],
+  "dependencies": {
+    "codemirror": "~5.8.0",
+    "jquery": "~2.1.4"
+  }
 }

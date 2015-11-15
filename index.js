@@ -15,9 +15,22 @@ app.get('/tester', function(req, res) {
   res.sendfile('./tester.html');
 });
 
-io.on('connection', function(socket) {
-  console.log('connected to client.');
-});
+(function() {
+
+  var text = '';
+
+  io.on('connection', function(socket) {
+    console.log('connected to client.');
+    socket.emit('current text', text);
+
+    socket.on('keystroke', function(key) {
+      text = text + key;
+      io.emit('current text', text);
+      console.log(text);
+    });
+  });
+
+})();
 
 http.listen(3000, function() {
   console.log('listening on *:3000');

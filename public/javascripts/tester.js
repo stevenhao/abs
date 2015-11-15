@@ -1,4 +1,9 @@
 window.onload = function() {
+  var cm = CodeMirror(document.body, {
+    lineNumbers: true,
+    readOnly: "nocursor"
+  });
+
   var socket = io();
   console.log('connected to server');
 
@@ -11,6 +16,6 @@ window.onload = function() {
   );
 
   socket.on('current text', function(text) {
-    $('#text').text(text);
+    cm.setValue(text);
   })
 };

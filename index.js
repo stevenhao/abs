@@ -39,26 +39,27 @@ app.get('/tester', function(req, res) {
   };
 
   io.on('connection', function(socket) {
-    console.log('connected to client.');
 
     var uid = tot_users;
     alive.push(true);
     sockets.push(socket);
     live_users ++;
+    tot_users ++;
+
+    console.log('connected to client ' + uid);
 
     socket.emit('uid', uid);
     socket.emit('current text', text);
 
     if(live_users == 1) {
-      cur_user = 1;
+      cur_user = uid;
       socket.emit('enable user');
     } else {
       socket.emit('disable user');
     }
 
-    tot_users ++;
-
     socket.on('disconnect', function() {
+      console.log("user " + uid + " disconnected");
       alive[uid] = false;
       live_users --;
       if(cur_user === uid) {
@@ -81,7 +82,7 @@ app.get('/tester', function(req, res) {
 
 
 http.listen(app.get('port'), function() {
-  console.log('listening on *:3000');
+  console.log('listening on ' + app.get('port'));
 });
 
 module.exports = app;

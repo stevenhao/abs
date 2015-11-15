@@ -6,12 +6,18 @@ var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 app.get('/', function(req, res){
   res.sendfile('./index.html');
 });
 
+app.get('/tester', function(req, res){
+  res.sendfile('./tester.html');
+});
+
 io.on('connection', function(socket){
-  console.log('a user connected');
+  console.log('connected to client.');
 });
 
 http.listen(3000, function(){

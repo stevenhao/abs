@@ -1,9 +1,10 @@
 window.onload = function() {
-  var cm = CodeMirror(document.body, {
+  var cm = CodeMirror.fromTextArea(document.getElementById("codearea"), {
     lineNumbers: true,
     readOnly: "nocursor",
     gutters: ["CodeMirror-linenumbers", "author"]
   });
+  cm.setSize(null, "100%");
 
   var socket = io();
   console.log('connected to server');

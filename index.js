@@ -17,7 +17,7 @@ app.get('/tester', function(req, res){
   res.sendfile('./tester.html');
 });
 
-io.on('connection', function(socket){
+io.on('connection', function(socket) {
   console.log('connected to client.');
 });
 

@@ -23,6 +23,11 @@ app.get('/tester', function(req, res) {
     console.log('connected to client.');
     socket.emit('current text', text);
 
+    socket.on('backspace', function() {
+      text = text.substring(0, text.length - 1);
+      io.emit('current text', text);
+      console.log(text);
+    });
     socket.on('keystroke', function(key) {
       text = text + key;
       io.emit('current text', text);

@@ -8,11 +8,11 @@ app.use(express.static('public'));
 app.use('/bower_components', express.static('bower_components'));
 
 app.get('/', function(req, res) {
-  res.sendFile('./index.html');
+  res.sendfile('index.html');
 });
 
 app.get('/tester', function(req, res) {
-  res.sendFile('./tester.html');
+  res.sendfile('./tester.html');
 });
 
 io.on('connection', function(socket) {

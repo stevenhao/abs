@@ -23,7 +23,7 @@ window.onload = function() {
 
   socket.on('enable user', function() {
     console.log("enable user");
-    $('#m').prop('disabled', false);
+    $('#m').prop('disabled', false).focus();
   });
 
   socket.on('disable user', function() {

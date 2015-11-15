@@ -7,15 +7,31 @@ window.onload = function() {
   var socket = io();
   console.log('connected to server');
 
-  $(document).keypress(
-    function(event) {
-      var key = String.fromCharCode(event.charCode);
-      socket.emit('keystroke', key);
-      console.log('Send ' + key);
-    }
-  );
+  socket.on('uid', function(uid) {
+    console.log('uid ' + uid);
+  });
+
+  $('form').submit(function(){
+    if($('#m').val() === '') return false;
+    console.log($('#m').val());
+    socket.emit('code line', $('#m').val());
+    $('#m').val('');
+    $('#m').prop('disabled', true);
+    return false;
+  });
+
+  socket.on('enable user', function() {
+    console.log("enable user");
+    $('#m').prop('disabled', false);
+  });
+
+  socket.on('disable user', function() {
+    console.log("disable user");
+    $('#m').prop('disabled', true);
+  });
 
   socket.on('current text', function(text) {
     cm.setValue(text);
   })
+
 };

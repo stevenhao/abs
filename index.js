@@ -1,19 +1,18 @@
 var express = require('express');
-var path = require('path');
 
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 app.use('/bower_components', express.static('bower_components'));
 
 app.get('/', function(req, res) {
-  res.sendfile('./index.html');
+  res.sendFile('./index.html');
 });
 
 app.get('/tester', function(req, res) {
-  res.sendfile('./tester.html');
+  res.sendFile('./tester.html');
 });
 
 io.on('connection', function(socket) {

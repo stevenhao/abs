@@ -72,7 +72,7 @@ app.get('/tester', function(req, res) {
       socket.emit('disable user');
       if(text !== '') text += '\n';
       text += key;
-      io.emit('current text', text);
+      io.emit('current text', text, cur_user);
       console.log(text);
       next_user();
     });

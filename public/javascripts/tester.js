@@ -1,7 +1,8 @@
 window.onload = function() {
   var cm = CodeMirror(document.body, {
     lineNumbers: true,
-    readOnly: "nocursor"
+    readOnly: "nocursor",
+    gutters: ["CodeMirror-linenumbers", "author"]
   });
 
   var socket = io();
@@ -30,8 +31,23 @@ window.onload = function() {
     $('#m').prop('disabled', true);
   });
 
-  socket.on('current text', function(text) {
-    cm.setValue(text);
-  })
+  function makeAuthorDiv(author) {
+    var d = document.createElement("div");
+    d.style.color = "#822";
+    d.innerHTML = author;
+    return d;
+  }
 
+  socket.on('current text', function(text, uid) {
+    cm.setValue(text);
+    if (typeof uid !== 'undefined') {
+      var n = cm.lineCount() - 1;
+      var info = cm.lineInfo(n);
+      if (info) {
+        cm.setGutterMarker(n, "author", info.gutterMarkers ? null : makeAuthorDiv(uid));
+      } else {
+        console.log("null info (len = " + n + ")");
+      }
+    }
+  });
 };
